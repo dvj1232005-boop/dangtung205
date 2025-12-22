@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dao Dang Tung (Bin) | Portfolio</title>
+
+<style>
+:root{
+  --bg1:#f8fafc;--bg2:#eef2ff;--card:#ffffff;
+  --text:#0f172a;--sub:#64748b;
+  --accent1:#2563eb;--accent2:#38bdf8;
+}
+body.dark{
+  --bg1:#020617;--bg2:#020617;--card:#020617;
+  --text:#e5e7eb;--sub:#94a3b8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);transition:.3s;
+}
+.container{max-width:1100px;margin:auto;padding:50px 20px}
+header{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.avatar-wrap{
+  width:160px;height:160px;border-radius:50%;padding:4px;
+  background:linear-gradient(270deg,var(--accent1),var(--accent2),var(--accent1));
+  background-size:600% 600%;animation:gradient 6s ease infinite;
+}
+.avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#fff}
+.lang{margin-left:auto}
+.lang button{
+  border:1px solid #cbd5f5;background:#fff;
+  padding:6px 10px;border-radius:999px;
+  margin-left:6px;cursor:pointer;font-size:13px
+}
+h1{margin:0;font-size:36px}
+.role{color:var(--sub);margin-top:6px}
+.slogan{font-style:italic;color:var(--accent1);margin-top:8px}
+.section-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-right:10px;font-size:26px;color:var(--accent1)
+}
+.banner{
+  margin-top:40px;height:220px;border-radius:24px;
+  background:url("cover.png") center/cover no-repeat;
+  position:relative;overflow:hidden;
+}
+.banner::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.4))
+}
+.banner-caption{
+  position:absolute;left:20px;bottom:14px;color:#fff;font-size:14px
+}
+section{margin-top:70px}
+.card{
+  background:var(--card);border-radius:22px;padding:36px;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  opacity:0;transform:translateY(40px);transition:.8s
+}
+.card.show{opacity:1;transform:none}
+.tag{
+  display:inline-block;padding:8px 16px;border-radius:999px;
+  background:#e0e7ff;color:#1e3a8a;margin:8px 8px 0 0;font-size:14px
+}
+body.dark .tag{background:#1e293b;color:#e5e7eb}
+.quote{text-align:center;font-style:italic;color:var(--sub);font-size:20px}
+.music-btn,.dark-btn{
+  position:fixed;right:20px;width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;z-index:999;color:#fff
+}
+.music-btn{bottom:22px;background:#2563eb}
+.dark-btn{bottom:86px;background:#111827}
+@keyframes gradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<header>
+  <div class="avatar-wrap"><img src="avatar.jpg" class="avatar"></div>
+  <div>
+    <h1 id="name"></h1>
+    <div class="role" id="role"></div>
+    <div class="slogan" id="slogan"></div>
+  </div>
+  <div class="lang">
+    <button onclick="setLang('vi')">🇻🇳</button>
+    <button onclick="setLang('en')">🇬🇧</button>
+    <button onclick="setLang('cn')">🇨🇳</button>
+    <button onclick="setLang('ja')">🇯🇵</button>
+    <button onclick="setLang('ko')">🇰🇷</button>
+    <button onclick="setLang('fr')">🇫🇷</button>
+    <button onclick="setLang('ru')">🇷🇺</button>
+  </div>
+</header>
+
+<div class="banner"><div class="banner-caption" id="bannerCaption"></div></div>
+
+<section class="card">
+  <h2><span class="section-icon">👤</span><span id="aboutTitle"></span></h2>
+  <p id="about"></p>
+</section>
+
+<section class="card">
+  <h2><span class="section-icon">📂</span><span id="projectTitle"></span></h2>
+  <div id="projects"></div>
+</section>
+
+<section class="card quote" id="quote"></section>
+</div>
+
+<audio id="bgMusic" loop><source src="music.mp3"></audio>
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+<div class="dark-btn" onclick="toggleDark()">🌙</div>
+
+<script>
+const aboutText={
+ vi:"Xin chào, mình là Tùng 👋 Sinh ngày 23/05/2005, năm nay 20 tuổi đủ trẻ để không ngại học hỏi và đủ nghiêm túc để làm việc đến nơi đến chốn. Mình đề cao trách nhiệm, sự rõ ràng trong công việc và luôn giữ tinh thần tích cực khi hợp tác với mọi người. Mình tin rằng phát triển bản thân là một quá trình liên tục. Hãy kéo xuống dưới để tìm hiểu thêm nhé 😉👇",
+ en:"Hi, I’m Tung 👋 I was born on May 23, 2005 and I am currently 20 years old. I believe personal growth is a continuous journey. Feel free to scroll down to learn more 😉👇",
+ cn:"你好，我是 Tùng 👋 我出生于 2005 年 5 月 23 日，今年 20 岁。我相信自我成长是一个持续的过程，欢迎继续往下了解 😉👇",
+ ja:"こんにちは、トゥンです 👋 2005年5月23日生まれで現在20歳です。自己成長は継続的なプロセスだと考えています 😉👇",
+ ko:"안녕하세요, 퉁입니다 👋 2005년 5월 23일생이며 현재 20세입니다. 자기 발전은 지속적인 과정이라고 믿습니다 😉👇",
+ fr:"Bonjour, je m’appelle Tung 👋 Né le 23 mai 2005, j’ai 20 ans. Le développement personnel est un processus continu 😉👇",
+ ru:"Здравствуйте, меня зовут Тунг 👋 Я родился 23 мая 2005 года, мне 20 лет. Личное развитие это непрерывный процесс 😉👇"
+};
+
+const projects={
+ vi:["Website portfolio cá nhân","Website đa ngôn ngữ có nhạc nền","Quản lý công việc cá nhân","Website chia sẻ tài liệu","Website quán cà phê","Quản lý nhân sự cơ bản","Website bán hàng mini","Website nội dung sáng tạo","Ứng dụng học tập AI mô phỏng","Website du lịch check in"],
+ en:["Personal portfolio website","Multilingual website with music","Task management system","Learning resource website","Coffee shop website","Basic HR system","Mini ecommerce website","Creative content website","AI learning app simulation","Travel check in website"]
+};
+
+function setLang(l){
+ name.innerText="Đào Đăng Tùng (Bin)";
+ role.innerText="Personal Portfolio";
+ slogan.innerText="Grow a little better every day";
+ bannerCaption.innerText="Life • Work • Growth";
+ aboutTitle.innerText=l==="vi"?"Giới thiệu":"About";
+ projectTitle.innerText=l==="vi"?"Dự án":"Projects";
+ about.innerText=aboutText[l];
+ projectsBox=projects[l]||projects.en;
+ projects.innerHTML=projectsBox.map(p=>`<span class="tag">${p}</span>`).join("");
+ quote.innerText="Keep learning. Keep growing.";
+}
+
+setLang("vi");
+
+let play=false;
+const music=document.getElementById("bgMusic");
+function toggleMusic(){play?music.pause():music.play();play=!play}
+function toggleDark(){document.body.classList.toggle("dark")}
+
+const cards=document.querySelectorAll(".card");
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("show")));
+cards.forEach(c=>io.observe(c));
+</script>
+
+</body>
+</html>
