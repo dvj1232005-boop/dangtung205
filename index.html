@@ -22,6 +22,8 @@ body{
   color:var(--text);transition:.3s;
 }
 .container{max-width:1100px;margin:auto;padding:50px 20px}
+
+/* HEADER */
 header{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
 .avatar-wrap{
   width:160px;height:160px;border-radius:50%;padding:4px;
@@ -38,10 +40,14 @@ header{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
 h1{margin:0;font-size:36px}
 .role{color:var(--sub);margin-top:6px}
 .slogan{font-style:italic;color:var(--accent1);margin-top:8px}
+
+/* ICON */
 .section-icon{
   display:inline-flex;align-items:center;justify-content:center;
   margin-right:10px;font-size:26px;color:var(--accent1)
 }
+
+/* BANNER */
 .banner{
   margin-top:40px;height:220px;border-radius:24px;
   background:url("cover.png") center/cover no-repeat;
@@ -54,6 +60,8 @@ h1{margin:0;font-size:36px}
 .banner-caption{
   position:absolute;left:20px;bottom:14px;color:#fff;font-size:14px
 }
+
+/* SECTIONS */
 section{margin-top:70px}
 .card{
   background:var(--card);border-radius:22px;padding:36px;
@@ -67,6 +75,8 @@ section{margin-top:70px}
 }
 body.dark .tag{background:#1e293b;color:#e5e7eb}
 .quote{text-align:center;font-style:italic;color:var(--sub);font-size:20px}
+
+/* BUTTONS */
 .music-btn,.dark-btn{
   position:fixed;right:20px;width:52px;height:52px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -74,6 +84,7 @@ body.dark .tag{background:#1e293b;color:#e5e7eb}
 }
 .music-btn{bottom:22px;background:#2563eb}
 .dark-btn{bottom:86px;background:#111827}
+
 @keyframes gradient{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -85,6 +96,7 @@ body.dark .tag{background:#1e293b;color:#e5e7eb}
 <body>
 
 <div class="container">
+
 <header>
   <div class="avatar-wrap"><img src="avatar.jpg" class="avatar"></div>
   <div>
@@ -116,6 +128,7 @@ body.dark .tag{background:#1e293b;color:#e5e7eb}
 </section>
 
 <section class="card quote" id="quote"></section>
+
 </div>
 
 <audio id="bgMusic" loop><source src="music.mp3"></audio>
@@ -123,36 +136,81 @@ body.dark .tag{background:#1e293b;color:#e5e7eb}
 <div class="dark-btn" onclick="toggleDark()">🌙</div>
 
 <script>
+/* ===== TEXT ===== */
 const aboutText={
- vi:"Xin chào, mình là Tùng 👋 Sinh ngày 23/05/2005, năm nay 20 tuổi đủ trẻ để không ngại học hỏi và đủ nghiêm túc để làm việc đến nơi đến chốn. Mình đề cao trách nhiệm, sự rõ ràng trong công việc và luôn giữ tinh thần tích cực khi hợp tác với mọi người. Mình tin rằng phát triển bản thân là một quá trình liên tục. Hãy kéo xuống dưới để tìm hiểu thêm nhé 😉👇",
- en:"Hi, I’m Tung 👋 I was born on May 23, 2005 and I am currently 20 years old. I believe personal growth is a continuous journey. Feel free to scroll down to learn more 😉👇",
- cn:"你好，我是 Tùng 👋 我出生于 2005 年 5 月 23 日，今年 20 岁。我相信自我成长是一个持续的过程，欢迎继续往下了解 😉👇",
- ja:"こんにちは、トゥンです 👋 2005年5月23日生まれで現在20歳です。自己成長は継続的なプロセスだと考えています 😉👇",
- ko:"안녕하세요, 퉁입니다 👋 2005년 5월 23일생이며 현재 20세입니다. 자기 발전은 지속적인 과정이라고 믿습니다 😉👇",
- fr:"Bonjour, je m’appelle Tung 👋 Né le 23 mai 2005, j’ai 20 ans. Le développement personnel est un processus continu 😉👇",
- ru:"Здравствуйте, меня зовут Тунг 👋 Я родился 23 мая 2005 года, мне 20 лет. Личное развитие это непрерывный процесс 😉👇"
+ vi:"Xin chào, mình là Tùng 👋 Sinh ngày 23/05/2005, năm nay 20 tuổi đủ trẻ để không ngại học hỏi và đủ nghiêm túc để làm việc đến nơi đến chốn. Mình tin rằng phát triển bản thân là một quá trình liên tục.",
+ en:"Hi, I’m Tung 👋 Born on May 23, 2005. I believe personal growth is a continuous journey.",
+ cn:"你好，我是 Tùng 👋 我出生于 2005 年 5 月 23 日，相信成长是一个持续的过程。",
+ ja:"こんにちは、トゥンです 👋 自己成長は継続的なプロセスだと考えています。",
+ ko:"안녕하세요, 퉁입니다 👋 자기 발전은 지속적인 과정이라고 믿습니다.",
+ fr:"Bonjour, je m’appelle Tung 👋 Le développement personnel est un processus continu.",
+ ru:"Здравствуйте, меня зовут Тунг 👋 Личное развитие — непрерывный процесс."
 };
 
-const projects={
- vi:["Website portfolio cá nhân","Website đa ngôn ngữ có nhạc nền","Quản lý công việc cá nhân","Website chia sẻ tài liệu","Website quán cà phê","Quản lý nhân sự cơ bản","Website bán hàng mini","Website nội dung sáng tạo","Ứng dụng học tập AI mô phỏng","Website du lịch check in"],
- en:["Personal portfolio website","Multilingual website with music","Task management system","Learning resource website","Coffee shop website","Basic HR system","Mini ecommerce website","Creative content website","AI learning app simulation","Travel check in website"]
+const projectsFull={
+ vi:[
+  "Website giới thiệu cá nhân và portfolio",
+  "Website cá nhân đa ngôn ngữ có nhạc nền",
+  "Hệ thống quản lý công việc cá nhân",
+  "Website chia sẻ tài liệu học tập",
+  "Website giới thiệu quán cà phê",
+  "Hệ thống quản lý nhân sự cơ bản",
+  "Website bán hàng mini",
+  "Website nội dung sáng tạo",
+  "Ứng dụng học tập AI mô phỏng",
+  "Website du lịch và check in"
+ ],
+ en:[
+  "Personal portfolio website",
+  "Multilingual website with background music",
+  "Personal task management system",
+  "Learning resource sharing website",
+  "Coffee shop introduction website",
+  "Basic HR management system",
+  "Mini ecommerce website",
+  "Creative content website",
+  "AI learning app simulation",
+  "Travel check in website"
+ ]
+};
+
+/* ===== CORE DATA ===== */
+const data={
+ vi:{role:"Nhân viên tại An Cafeeeeeeeee ☕",slogan:"Bắt đầu từ điều nhỏ nhất, kiên trì mỗi ngày",banner:"Life • Work • Growth",
+     aboutTitle:"Giới thiệu",projectTitle:"Dự án",quote:"Không cần giỏi ngay từ đầu, chỉ cần không bỏ cuộc."},
+ en:{role:"Staff at An Cafeeeeeeeee ☕",slogan:"Start small. Stay consistent. Become better every day.",banner:"Life • Work • Growth",
+     aboutTitle:"About",projectTitle:"Projects",quote:"Just don’t quit."},
+ cn:{role:"An Cafeeeeeeeee 员工 ☕",slogan:"从小开始，坚持每天进步",banner:"生活 • 工作 • 成长",
+     aboutTitle:"自我介绍",projectTitle:"项目",quote:"只要不放弃。"},
+ ja:{role:"An Cafeeeeeeeee スタッフ ☕",slogan:"小さな一歩から毎日成長する",banner:"生活・仕事・成長",
+     aboutTitle:"自己紹介",projectTitle:"プロジェクト",quote:"諦めないことが大切。"},
+ ko:{role:"An Cafeeeeeeeee 직원 ☕",slogan:"작은 것부터 시작해 매일 성장하기",banner:"삶 • 일 • 성장",
+     aboutTitle:"자기소개",projectTitle:"프로젝트",quote:"포기하지 마라."},
+ fr:{role:"Employé chez An Cafeeeeeeeee ☕",slogan:"Commencer petit, progresser chaque jour",banner:"Vie • Travail • Croissance",
+     aboutTitle:"À propos",projectTitle:"Projets",quote:"N’abandonne jamais."},
+ ru:{role:"Сотрудник An Cafeeeeeeeee ☕",slogan:"Начни с малого и развивайся каждый день",banner:"Жизнь • Работа • Рост",
+     aboutTitle:"Обо мне",projectTitle:"Проекты",quote:"Главное — не сдаваться."}
 };
 
 function setLang(l){
- name.innerText="Đào Đăng Tùng (Bin)";
- role.innerText="Personal Portfolio";
- slogan.innerText="Grow a little better every day";
- bannerCaption.innerText="Life • Work • Growth";
- aboutTitle.innerText=l==="vi"?"Giới thiệu":"About";
- projectTitle.innerText=l==="vi"?"Dự án":"Projects";
- about.innerText=aboutText[l];
- projectsBox=projects[l]||projects.en;
- projects.innerHTML=projectsBox.map(p=>`<span class="tag">${p}</span>`).join("");
- quote.innerText="Keep learning. Keep growing.";
+  name.innerText="Đào Đăng Tùng (Bin)";     // 🔒 TÊN CỐ ĐỊNH
+  role.innerText=data[l].role;
+  slogan.innerText=data[l].slogan;
+  bannerCaption.innerText=data[l].banner;
+
+  aboutTitle.innerText=data[l].aboutTitle;
+  about.innerText=aboutText[l];
+
+  projectTitle.innerText=data[l].projectTitle;
+  projects.innerHTML=(projectsFull[l]||projectsFull.en)
+    .map(p=>`<span class="tag">${p}</span>`).join("");
+
+  quote.innerText=data[l].quote;
 }
 
 setLang("vi");
 
+/* ===== UTIL ===== */
 let play=false;
 const music=document.getElementById("bgMusic");
 function toggleMusic(){play?music.pause():music.play();play=!play}
@@ -165,3 +223,4 @@ cards.forEach(c=>io.observe(c));
 
 </body>
 </html>
+
