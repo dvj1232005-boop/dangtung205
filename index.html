@@ -3,483 +3,430 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dao Dang Tung (Bin) | Portfolio</title>
-  <!-- Thêm Google Font Inter -->
+  <title>Dao Dang Tung | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
 <style>
 :root {  
-  --bg1: #f8fafc;
-  --bg2: #f1f5f9;
-  --card: #ffffff;  
-  --text: #1e293b;
-  --sub: #64748b;  
-  --accent1: #2563eb;
-  --accent2: #eff6ff;
-  --border: #e2e8f0;
+  --bg-main: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --text-main: #0f172a;
+  --text-sub: #475569;  
+  --accent-1: #2563eb;
+  --accent-2: #eff6ff;
+  --border-color: rgba(255, 255, 255, 0.5);
+  --card-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
+  --glass-blur: blur(12px);
+  --glow-1: #c7d2fe;
+  --glow-2: #e0e7ff;
 }
 
 body.dark {  
-  --bg1: #0f172a;
-  --bg2: #1e293b;
-  --card: #1e293b;  
-  --text: #f8fafc;
-  --sub: #94a3b8;
-  --accent1: #3b82f6;
-  --accent2: #1e293b;
-  --border: #334155;
+  --bg-main: #020617;
+  --bg-card: rgba(30, 41, 59, 0.6);
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --accent-1: #60a5fa;
+  --accent-2: #1e293b;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glow-1: #1e3a8a;
+  --glow-2: #312e81;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {  
-  margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;  
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));  
-  color: var(--text);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: 'Inter', sans-serif;  
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.5s ease;
+  overflow-x: hidden;
   line-height: 1.6;
 }
 
-.container {
-  max-width: 900px; /* Thu gọn lại một chút để form chữ đẹp hơn trên Desktop */
-  margin: auto;
-  padding: 60px 20px;
+/* ÁNH SÁNG NỀN (CINEMATIC GLOW) */
+.background-glow {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1; overflow: hidden; pointer-events: none;
 }
-
-/* HEADER */
-header {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.avatar-wrap {  
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  padding: 5px;  
-  background: var(--card);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
-}
-
-.avatar-wrap:hover {
-  transform: translateY(-5px) scale(1.02);
-}
-
-.avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border);
-}
-
-.profile-info {
-  flex: 1;
-}
-
-h1 {
-  margin: 0 0 5px 0;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.role {
-  color: var(--sub);
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.slogan {
-  color: var(--accent1);
-  margin-top: 8px;
-  font-weight: 400;
-  opacity: 0.9;
-}
-
-/* NGÔN NGỮ */
-.lang {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.lang button {  
-  border: 1px solid var(--border);
-  background: var(--card);  
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 8px;  
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-}
-
-.lang button:hover {
-  background: var(--accent1);
-  color: #fff;
-  border-color: var(--accent1);
-  transform: translateY(-2px);
-}
-
-/* ICON */
-.section-icon {  
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;  
-  margin-right: 12px;
-  font-size: 24px;
-}
-
-/* BANNER */
-.banner {  
-  margin-top: 40px;
-  height: 250px;
-  border-radius: 20px;  
-  background: url("cover.png") center/cover no-repeat;  
-  background-color: var(--border); /* Màu fallback nếu không có ảnh */
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.banner::after {  
-  content: "";
+.orb {
   position: absolute;
-  inset: 0;  
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 20s infinite alternate ease-in-out;
+}
+.orb-1 {
+  width: 400px; height: 400px;
+  background: var(--glow-1);
+  top: -10%; left: -10%;
+}
+.orb-2 {
+  width: 500px; height: 500px;
+  background: var(--glow-2);
+  bottom: -20%; right: -10%;
+  animation-delay: -5s;
 }
 
-.banner-caption {  
-  position: absolute;
-  left: 30px;
-  bottom: 20px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  z-index: 1;
-  letter-spacing: 1px;
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 50px) scale(1.2); }
 }
 
-/* SECTIONS & CARDS */
-section {
-  margin-top: 40px;
+/* GLASS NAVBAR */
+nav {
+  position: fixed;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  gap: 15px;
+  z-index: 100;
 }
 
-.card {  
-  background: var(--card);
+.lang-btn {
+  background: transparent; border: none;
+  color: var(--text-main);
+  font-weight: 500; font-size: 14px;
+  cursor: pointer; padding: 5px 10px;
   border-radius: 20px;
-  padding: 40px;  
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);  
-  border: 1px solid var(--border);
+  transition: 0.3s;
+}
+.lang-btn:hover, .lang-btn.active {
+  background: var(--text-main); color: var(--bg-main);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 100px auto 50px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* BENTO CARDS */
+.bento-card {  
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 24px;
+  padding: 32px;  
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s ease;
 }
 
-.card.show {
-  opacity: 1;
-  transform: none;
+.bento-card:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
 
-.card h2 {
-  margin-top: 0;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid var(--accent2);
-  padding-bottom: 15px;
-  margin-bottom: 25px;
+.bento-card.show { opacity: 1; transform: translateY(0); }
+
+.card-title {
+  font-size: 14px; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--text-sub);
+  margin-bottom: 20px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
 }
 
-/* TAGS CONTAINER */
-.tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+/* SPECIFIC GRID PLACEMENT */
+.hero-section { grid-column: span 3; display: flex; align-items: center; gap: 40px; padding: 40px; }
+.about-section { grid-column: span 2; }
+.skills-section { grid-column: span 1; }
+.projects-section { grid-column: span 3; }
+.hobbies-section { grid-column: span 1; }
+.future-section { grid-column: span 2; }
+.contact-section { grid-column: span 3; text-align: center; }
+
+/* HERO BENTO */
+.avatar-wrap {  
+  width: 150px; height: 150px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px solid var(--text-main);
+  overflow: hidden;
+}
+.avatar { width: 100%; height: 100%; object-fit: cover; }
+.hero-info h1 { font-size: 38px; font-weight: 700; margin-bottom: 5px; line-height: 1.1; }
+.hero-info .role { font-size: 18px; color: var(--text-sub); font-weight: 500; }
+.hero-info .slogan { margin-top: 15px; font-style: italic; color: var(--accent-1); border-left: 3px solid var(--accent-1); padding-left: 15px;}
+
+/* TAGS & PROJECTS */
+.tags-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.bento-tag {
+  background: var(--accent-2); color: var(--text-main);
+  padding: 8px 16px; border-radius: 12px;
+  font-size: 13px; font-weight: 500;
+  border: 1px solid var(--border-color);
 }
 
-.tag {  
-  display: inline-flex;
-  padding: 10px 18px;
-  border-radius: 12px;  
-  background: var(--accent2);
-  color: var(--accent1);
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;
 }
-
-body.dark .tag {
-  background: rgba(59, 130, 246, 0.1);
+.project-item {
+  padding: 20px; border-radius: 16px;
+  background: rgba(128, 128, 128, 0.05);
+  border: 1px solid var(--border-color);
+  transition: 0.3s;
+  display: flex; flex-direction: column; gap: 10px;
 }
-
-.tag:hover {
-  background: var(--accent1);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-}
-
-/* QUOTE */
-.quote {
-  text-align: center;
-  font-style: italic;
-  color: var(--sub);
-  font-size: 20px;
-  font-weight: 300;
-  padding: 50px 30px;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
+.project-item:hover { background: var(--accent-1); color: #fff; transform: translateY(-5px); }
+.project-item:hover .p-icon { filter: brightness(0) invert(1); }
+.p-icon { font-size: 24px; }
+.p-name { font-weight: 600; font-size: 15px; }
 
 /* CONTACT */
-.contact-list p {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  font-size: 16px;
+.contact-links { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+.contact-links a {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text-main);
+  font-weight: 500; background: var(--accent-2);
+  padding: 12px 24px; border-radius: 99px; transition: 0.3s;
 }
+.contact-links a:hover { background: var(--text-main); color: var(--bg-main); }
 
-.contact-list a {
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s;
-  font-weight: 500;
+/* FLOATING CONTROLS */
+.controls { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 99; }
+.ctrl-btn {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--bg-card); backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color); color: var(--text-main);
+  font-size: 20px; cursor: pointer; box-shadow: var(--card-shadow);
+  display: flex; align-items: center; justify-content: center;
+  transition: 0.3s;
 }
-
-.contact-list a:hover {
-  color: var(--accent1);
-}
-
-/* FLOATING BUTTONS */
-.floating-controls {
-  position: fixed;
-  right: 25px;
-  bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 999;
-}
-
-.float-btn {  
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;  
-  display: flex;
-  align-items: center;
-  justify-content: center;  
-  font-size: 20px;
-  cursor: pointer;
-  color: #fff;
-  border: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  transition: transform 0.2s, background 0.2s;
-}
-
-.music-btn { background: var(--accent1); }
-.dark-btn { background: #334155; }
-
-.float-btn:hover {
-  transform: scale(1.1);
-}
+.ctrl-btn:hover { background: var(--text-main); color: var(--bg-main); transform: scale(1.1); }
 
 /* RESPONSIVE */
-@media (max-width: 600px) {
-  .card { padding: 25px; }
-  header { justify-content: center; text-align: center; }
-  .lang { justify-content: center; width: 100%; margin-top: 10px; }
-  .avatar-wrap { width: 120px; height: 120px; }
+@media (max-width: 768px) {
+  .container { grid-template-columns: 1fr; }
+  .hero-section, .about-section, .skills-section, .projects-section, .hobbies-section, .future-section, .contact-section { grid-column: span 1; }
+  .hero-section { flex-direction: column; text-align: center; }
+  .hero-info .slogan { border-left: none; padding-left: 0; }
+  .contact-links { flex-direction: column; gap: 15px; }
 }
 </style>
 </head>
 <body>
 
+<div class="background-glow">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+
+<nav id="navbar">
+  <button class="lang-btn active" onclick="setLang('vi', this)">🇻🇳 VI</button>
+  <button class="lang-btn" onclick="setLang('en', this)">🇬🇧 EN</button>
+</nav>
+
 <div class="container">
-  <header>  
-    <div class="avatar-wrap"><img src="avatar.jpg" class="avatar" alt="Avatar"></div>  
-    <div class="profile-info">    
-      <h1 id="name"></h1>    
-      <div class="role" id="role"></div>    
-      <div class="slogan" id="slogan"></div>  
-    </div>  
-    <div class="lang">    
-      <button onclick="setLang('vi')">🇻🇳 VI</button>    
-      <button onclick="setLang('en')">🇬🇧 EN</button>    
-      <!-- Bạn có thể mở lại các ngôn ngữ khác nếu muốn -->
-      <!-- <button onclick="setLang('cn')">🇨🇳</button> -->
+  
+  <div class="bento-card hero-section">
+    <div class="avatar-wrap"><img src="avatar.jpg" class="avatar" alt="Dao Dang Tung"></div>
+    <div class="hero-info">
+      <h1 id="name"></h1>
+      <div class="role" id="role"></div>
+      <div class="slogan" id="slogan"></div>
     </div>
-  </header>
+  </div>
 
-  <div class="banner"><div class="banner-caption" id="bannerCaption"></div></div>
+  <div class="bento-card about-section">
+    <div class="card-title">✨ <span id="aboutTitle"></span></div>
+    <p id="about" style="font-size: 15px; line-height: 1.8;"></p>
+  </div>
 
-  <section class="card">  
-    <h2><span class="section-icon">👤</span><span id="aboutTitle"></span></h2>  
-    <p id="about"></p>
-  </section>
+  <div class="bento-card skills-section">
+    <div class="card-title">⚡ <span id="skillTitle"></span></div>
+    <div class="tags-grid" id="skills"></div>
+  </div>
 
-  <section class="card">  
-    <h2><span class="section-icon">🛠️</span><span id="skillTitle"></span></h2>  
-    <div class="tags-container" id="skills"></div>
-  </section>
+  <div class="bento-card projects-section">
+    <div class="card-title">🚀 <span id="projectTitle"></span></div>
+    <div class="projects-grid" id="projects"></div>
+  </div>
 
-  <section class="card">  
-    <h2><span class="section-icon">📂</span><span id="projectTitle"></span></h2>  
-    <div class="tags-container" id="projects"></div>
-  </section>
+  <div class="bento-card hobbies-section">
+    <div class="card-title">🎯 <span id="hobbyTitle"></span></div>
+    <div class="tags-grid" id="hobbies"></div>
+  </div>
 
-  <section class="card">  
-    <h2><span class="section-icon">🎯</span><span id="hobbyTitle"></span></h2>  
-    <div class="tags-container" id="hobbies"></div>
-  </section>
+  <div class="bento-card future-section">
+    <div class="card-title">💡 <span id="futureTitle"></span></div>
+    <p id="future" style="font-size: 15px;"></p>
+  </div>
 
-  <section class="card">  
-    <h2><span class="section-icon">🚀</span><span id="futureTitle"></span></h2>  
-    <p id="future"></p>
-  </section>
-
-  <section class="card quote" id="quote"></section>
-
-  <section class="card">  
-    <h2><span class="section-icon">📞</span><span id="contactTitle"></span></h2>  
-    <div class="contact-list">
-      <p>📧 <a href="mailto:dvj1232005@gmail.com">dvj1232005@gmail.com</a></p>  
-      <p>📘 <a href="https://facebook.com/tungnehhh" target="_blank">facebook.com/tungnehhh</a></p>  
-      <p>📱 <a href="tel:0866823055">0866 823 055</a></p>
+  <div class="bento-card contact-section">
+    <div class="card-title" style="justify-content: center;">📬 <span id="contactTitle"></span></div>
+    <div class="contact-links">
+      <a href="mailto:dvj1232005@gmail.com">📧 Email Me</a>
+      <a href="https://facebook.com/tungnehhh" target="_blank">📘 Facebook</a>
+      <a href="tel:0866823055">📱 0866 823 055</a>
     </div>
-  </section>
+  </div>
+
 </div>
 
 <audio id="bgMusic" loop><source src="music.mp3"></audio>
 
-<div class="floating-controls">
-  <button class="float-btn dark-btn" onclick="toggleDark()" title="Đổi giao diện">🌙</button>
-  <button class="float-btn music-btn" onclick="toggleMusic()" title="Bật/Tắt nhạc">🎵</button>
+<div class="controls">
+  <button class="ctrl-btn" onclick="toggleDark()" title="Theme">🌗</button>
+  <button class="ctrl-btn" onclick="toggleMusic()" id="musicBtn" title="Music">🎵</button>
 </div>
 
 <script>
 const aboutText = { 
-  vi: "Xin chào, mình là Tùng 👋 Sinh ngày 23/05/2005, năm nay 20 tuổi. Mình đề cao trách nhiệm, sự rõ ràng trong công việc và luôn giữ tinh thần tích cực. Mình tin rằng phát triển bản thân là một quá trình liên tục.", 
-  en: "Hi, I’m Tung 👋 Born on May 23, 2005. I believe personal growth is a continuous journey.", 
-  cn: "你好，我是 Tùng 👋 我出生于 2005 年 5 月 23 日，相信成长是一个持续的过程。"
+  vi: "Xin chào, mình là Tùng. Chú trọng trách nhiệm, sự rõ ràng trong công việc và duy trì tinh thần tích cực. Mình luôn tin rằng quá trình hoàn thiện bản thân không bao giờ có điểm dừng.", 
+  en: "Hi, I’m Tung. I value responsibility, clarity in work, and maintaining a positive mindset. I believe self-improvement is an endless journey."
 };
 
 const projectsFull = { 
-  vi: ["Website portfolio cá nhân", "Website đa ngôn ngữ có nhạc nền", "Quản lý công việc cá nhân", "Website chia sẻ tài liệu", "Website quán cà phê", "Quản lý nhân sự cơ bản", "Website bán hàng mini", "Website nội dung sáng tạo", "Ứng dụng học tập AI mô phỏng", "Website du lịch check in"], 
-  en: ["Personal portfolio website", "Multilingual website with music", "Task management system", "Learning resource website", "Coffee shop website", "Basic HR system", "Mini ecommerce website", "Creative content website", "AI learning app simulation", "Travel check in website"]
+  vi: [
+    { name: "Website Portfolio Cá Nhân", icon: "👨‍💻" },
+    { name: "Website Đa Ngôn Ngữ", icon: "🌐" },
+    { name: "Hệ Thống Quản Lý CV", icon: "📋" },
+    { name: "Website Quán Cà Phê", icon: "☕" },
+    { name: "Trang Web Bán Hàng Mini", icon: "🛒" },
+    { name: "Ứng Dụng Học Tập AI", icon: "🤖" }
+  ], 
+  en: [
+    { name: "Personal Portfolio", icon: "👨‍💻" },
+    { name: "Multilingual Website", icon: "🌐" },
+    { name: "Task Management System", icon: "📋" },
+    { name: "Coffee Shop Website", icon: "☕" },
+    { name: "Mini E-commerce", icon: "🛒" },
+    { name: "AI Learning App", icon: "🤖" }
+  ]
 };
 
 const data = { 
   vi: {  
     role: "Nhân viên tại An Cafe ☕",  
-    slogan: "Bắt đầu từ điều nhỏ nhất, kiên trì mỗi ngày.",  
-    banner: "Life • Work • Growth",  
+    slogan: "“Bắt đầu từ điều nhỏ nhất, kiên trì mỗi ngày.”",  
     aboutTitle: "Giới thiệu",  
-    skillTitle: "Kỹ năng nổi bật",  
-    skills: ["Giao tiếp", "Làm việc nhóm", "Quản lý thời gian", "Tinh thần học hỏi", "Sáng tạo"],  
-    projectTitle: "Dự án cá nhân",  
+    skillTitle: "Kỹ năng",  
+    skills: ["Giao tiếp", "Làm việc nhóm", "Quản lý thời gian", "Tự học", "Sáng tạo"],  
+    projectTitle: "Dự án tiêu biểu",  
     hobbyTitle: "Sở thích",  
-    hobbies: ["Chạy bộ 🏃", "Cầu lông 🏸", "Nghe nhạc 🎧", "Đọc sách 📚"],  
-    futureTitle: "Mục tiêu tương lai",  
-    future: "Không ngừng học hỏi, nâng cao kỹ năng và xây dựng sự nghiệp bền vững.",  
-    quote: "“Không cần giỏi ngay từ đầu, chỉ cần không bỏ cuộc.”",  
-    contactTitle: "Liên hệ với mình" 
+    hobbies: ["Chạy bộ", "Cầu lông", "Nghe nhạc", "Đọc sách"],  
+    futureTitle: "Mục tiêu",  
+    future: "Không ngừng học hỏi, nâng cao kỹ năng chuyên môn và xây dựng một sự nghiệp vững chắc.",  
+    contactTitle: "Kết nối với mình" 
   }, 
   en: {  
     role: "Staff at An Cafe ☕",  
-    slogan: "Start small. Stay consistent. Become better every day.",  
-    banner: "Life • Work • Growth",  
+    slogan: "“Start small. Stay consistent. Become better every day.”",  
     aboutTitle: "About Me",  
     skillTitle: "Core Skills",  
-    skills: ["Communication", "Teamwork", "Time management", "Self learning", "Creativity"],  
-    projectTitle: "My Projects",  
-    hobbyTitle: "Hobbies",  
-    hobbies: ["Jogging 🏃", "Badminton 🏸", "Music 🎧", "Reading 📚"],  
+    skills: ["Communication", "Teamwork", "Time Management", "Self-learning", "Creative"],  
+    projectTitle: "Featured Projects",  
+    hobbyTitle: "Interests",  
+    hobbies: ["Jogging", "Badminton", "Music", "Reading"],  
     futureTitle: "Future Goals",  
-    future: "Continuously learning and building a sustainable career.",  
-    quote: "“Just don’t quit.”",  
-    contactTitle: "Get in touch" 
+    future: "Continuously learning to improve professional skills and build a solid career foundation.",  
+    contactTitle: "Let's Connect" 
   }
 };
 
-function setLang(l) { 
+function setLang(l, btnElement) { 
+  // Update active button state
+  if(btnElement) {
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+  }
+
   document.getElementById("name").innerText = "Đào Đăng Tùng (Bin)"; 
   const d = data[l] || data.en;
   
   document.getElementById("role").innerText = d.role; 
   document.getElementById("slogan").innerText = d.slogan; 
-  document.getElementById("bannerCaption").innerText = d.banner;
   
   document.getElementById("aboutTitle").innerText = d.aboutTitle; 
-  document.getElementById("about").innerText = aboutText[l] || aboutText.en;
+  document.getElementById("about").innerText = aboutText[l];
   
   document.getElementById("skillTitle").innerText = d.skillTitle; 
-  document.getElementById("skills").innerHTML = d.skills.map(s => `<span class="tag">${s}</span>`).join("");
+  document.getElementById("skills").innerHTML = d.skills.map(s => `<div class="bento-tag">${s}</div>`).join("");
   
   document.getElementById("projectTitle").innerText = d.projectTitle; 
-  document.getElementById("projects").innerHTML = (projectsFull[l] || projectsFull.en).map(p => `<span class="tag">${p}</span>`).join("");
+  const projArray = projectsFull[l] || projectsFull.en;
+  document.getElementById("projects").innerHTML = projArray.map(p => `
+    <div class="project-item">
+      <div class="p-icon">${p.icon}</div>
+      <div class="p-name">${p.name}</div>
+    </div>
+  `).join("");
   
   document.getElementById("hobbyTitle").innerText = d.hobbyTitle; 
-  document.getElementById("hobbies").innerHTML = d.hobbies.map(h => `<span class="tag">${h}</span>`).join("");
+  document.getElementById("hobbies").innerHTML = d.hobbies.map(h => `<div class="bento-tag">${h}</div>`).join("");
   
   document.getElementById("futureTitle").innerText = d.futureTitle; 
   document.getElementById("future").innerText = d.future;
   
-  document.getElementById("quote").innerText = d.quote; 
   document.getElementById("contactTitle").innerText = d.contactTitle;
 }
 
+// Khởi tạo ngôn ngữ mặc định
 setLang("vi");
 
-// Xử lý nhạc nền
+// Xử lý Audio
 let play = false;
 const music = document.getElementById("bgMusic");
 function toggleMusic() {
-  const btn = document.querySelector('.music-btn');
+  const btn = document.getElementById('musicBtn');
   if(play) {
     music.pause();
     btn.innerHTML = "🎵";
-    btn.style.opacity = "0.7";
   } else {
     music.play();
     btn.innerHTML = "🎶";
-    btn.style.opacity = "1";
   }
   play = !play;
 }
 
-// Xử lý Dark mode
+// Xử lý Dark Mode
 function toggleDark() {
   document.body.classList.toggle("dark");
-  const btn = document.querySelector('.dark-btn');
-  if(document.body.classList.contains("dark")) {
-    btn.innerHTML = "☀️";
-  } else {
-    btn.innerHTML = "🌙";
-  }
 }
 
-// Hiệu ứng cuộn trang
-const cards = document.querySelectorAll(".card");
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add("show");
+// Intersection Observer cho hiệu ứng xuất hiện mượt mà
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      // Thêm delay nhẹ cho mỗi card để tạo hiệu ứng lượn sóng (stagger)
+      setTimeout(() => {
+        entry.target.classList.add('show');
+      }, index * 100);
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+}, observerOptions);
 
-cards.forEach(c => io.observe(c));
+document.querySelectorAll('.bento-card').forEach((card) => {
+  observer.observe(card);
+});
+
+// Chạy sẵn animation cho section Hero khi vừa load web
+setTimeout(() => {
+  document.querySelector('.hero-section').classList.add('show');
+}, 100);
+
 </script>
 </body>
 </html>
