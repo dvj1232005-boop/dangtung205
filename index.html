@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dao Dang Tung | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Dang Tung | Professional Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
 <style>
 :root {  
-  --bg-main: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --text-main: #0f172a;
-  --text-sub: #475569;  
+  --bg-main: #f4f4f5;
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --text-main: #18181b;
+  --text-sub: #52525b;  
   --accent-1: #2563eb;
-  --accent-2: #eff6ff;
-  --border-color: rgba(255, 255, 255, 0.5);
-  --card-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
-  --glass-blur: blur(12px);
-  --glow-1: #c7d2fe;
-  --glow-2: #e0e7ff;
+  --accent-2: rgba(37, 99, 235, 0.1);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(20px);
+  --glow-1: #3b82f6;
+  --glow-2: #8b5cf6;
 }
 
 body.dark {  
-  --bg-main: #020617;
-  --bg-card: rgba(30, 41, 59, 0.6);
-  --text-main: #f8fafc;
-  --text-sub: #94a3b8;
+  --bg-main: #09090b;
+  --bg-card: rgba(24, 24, 27, 0.6);
+  --text-main: #fafafa;
+  --text-sub: #a1a1aa;
   --accent-1: #60a5fa;
-  --accent-2: #1e293b;
-  --border-color: rgba(255, 255, 255, 0.05);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --glow-1: #1e3a8a;
-  --glow-2: #312e81;
+  --accent-2: rgba(96, 165, 250, 0.1);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --glow-1: #1d4ed8;
+  --glow-2: #4c1d95;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,239 +40,230 @@ body {
   font-family: 'Inter', sans-serif;  
   background-color: var(--bg-main);
   color: var(--text-main);
-  transition: background-color 0.5s ease;
+  transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HIỆU ỨNG NHIỄU HẠT (PREMIUM NOISE TEXTURE) */
+.noise-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; mix-blend-mode: overlay;
 }
 
 /* ÁNH SÁNG NỀN (CINEMATIC GLOW) */
 .background-glow {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   z-index: -1; overflow: hidden; pointer-events: none;
 }
 .orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
-  animation: float 20s infinite alternate ease-in-out;
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5;
+  animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 .orb-1 {
-  width: 400px; height: 400px;
-  background: var(--glow-1);
-  top: -10%; left: -10%;
+  width: 60vw; height: 60vw; background: var(--glow-1);
+  top: -20%; left: -10%;
 }
 .orb-2 {
-  width: 500px; height: 500px;
-  background: var(--glow-2);
-  bottom: -20%; right: -10%;
-  animation-delay: -5s;
+  width: 50vw; height: 50vw; background: var(--glow-2);
+  bottom: -20%; right: -10%; animation-delay: -5s;
 }
 
 @keyframes float {
   0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 50px) scale(1.2); }
+  100% { transform: translate(80px, 80px) scale(1.1); }
 }
 
 /* GLASS NAVBAR */
 nav {
-  position: fixed;
-  top: 20px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  padding: 10px 20px;
-  border-radius: 99px;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--card-shadow);
-  display: flex;
-  gap: 15px;
-  z-index: 100;
+  position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--bg-card); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: 6px 6px; border-radius: 99px; border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow); display: flex; gap: 4px; z-index: 100;
 }
-
 .lang-btn {
-  background: transparent; border: none;
-  color: var(--text-main);
-  font-weight: 500; font-size: 14px;
-  cursor: pointer; padding: 5px 10px;
-  border-radius: 20px;
-  transition: 0.3s;
+  background: transparent; border: none; color: var(--text-sub);
+  font-weight: 500; font-size: 13px; letter-spacing: 0.5px;
+  cursor: pointer; padding: 8px 16px; border-radius: 99px; transition: all 0.3s ease;
 }
-.lang-btn:hover, .lang-btn.active {
-  background: var(--text-main); color: var(--bg-main);
-}
+.lang-btn:hover { color: var(--text-main); }
+.lang-btn.active { background: var(--text-main); color: var(--bg-main); }
 
 .container {
-  max-width: 1000px;
-  margin: 100px auto 50px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  max-width: 1080px; margin: 120px auto 60px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
 }
 
 /* BENTO CARDS */
 .bento-card {  
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-radius: 24px;
-  padding: 32px;  
-  border: 1px solid var(--border-color);
-  box-shadow: var(--card-shadow);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.3s ease;
+  background: var(--bg-card); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 24px; padding: 40px; border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow); opacity: 0; transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative; overflow: hidden;
 }
-
-.bento-card:hover {
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-}
-
+.bento-card:hover { border-color: rgba(150, 150, 150, 0.3); }
 .bento-card.show { opacity: 1; transform: translateY(0); }
 
 .card-title {
-  font-size: 14px; text-transform: uppercase;
-  letter-spacing: 1.5px; color: var(--text-sub);
-  margin-bottom: 20px; font-weight: 600;
-  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-sub); margin-bottom: 24px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
 }
+.card-title svg { width: 16px; height: 16px; stroke-width: 2px; }
 
-/* SPECIFIC GRID PLACEMENT */
-.hero-section { grid-column: span 3; display: flex; align-items: center; gap: 40px; padding: 40px; }
-.about-section { grid-column: span 2; }
-.skills-section { grid-column: span 1; }
-.projects-section { grid-column: span 3; }
-.hobbies-section { grid-column: span 1; }
-.future-section { grid-column: span 2; }
-.contact-section { grid-column: span 3; text-align: center; }
+/* GRID PLACEMENT */
+.hero-section { grid-column: span 12; display: flex; align-items: center; gap: 48px; padding: 48px; }
+.about-section { grid-column: span 7; }
+.skills-section { grid-column: span 5; }
+.projects-section { grid-column: span 8; }
+.hobbies-section { grid-column: span 4; }
+.contact-section { grid-column: span 12; display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; }
 
 /* HERO BENTO */
 .avatar-wrap {  
-  width: 150px; height: 150px; flex-shrink: 0;
-  border-radius: 50%;
-  border: 3px solid var(--text-main);
-  overflow: hidden;
+  width: 160px; height: 160px; flex-shrink: 0; border-radius: 50%;
+  padding: 4px; border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, var(--accent-1), transparent);
 }
-.avatar { width: 100%; height: 100%; object-fit: cover; }
-.hero-info h1 { font-size: 38px; font-weight: 700; margin-bottom: 5px; line-height: 1.1; }
-.hero-info .role { font-size: 18px; color: var(--text-sub); font-weight: 500; }
-.hero-info .slogan { margin-top: 15px; font-style: italic; color: var(--accent-1); border-left: 3px solid var(--accent-1); padding-left: 15px;}
+.avatar { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.hero-info h1 { font-size: 42px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px; }
+.hero-info .role { font-size: 18px; color: var(--accent-1); font-weight: 600; letter-spacing: 0.5px; }
+.hero-info .slogan { margin-top: 16px; color: var(--text-sub); font-size: 16px; font-weight: 400; max-width: 600px; }
 
-/* TAGS & PROJECTS */
+/* TAGS (TECH FONT) */
 .tags-grid { display: flex; flex-wrap: wrap; gap: 10px; }
 .bento-tag {
   background: var(--accent-2); color: var(--text-main);
-  padding: 8px 16px; border-radius: 12px;
-  font-size: 13px; font-weight: 500;
-  border: 1px solid var(--border-color);
+  padding: 10px 16px; border-radius: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+  border: 1px solid transparent; transition: 0.3s;
 }
+.bento-tag:hover { border-color: var(--accent-1); transform: translateY(-2px); }
 
-.projects-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;
-}
+/* PROJECTS */
+.projects-grid { display: flex; flex-direction: column; gap: 16px; }
 .project-item {
-  padding: 20px; border-radius: 16px;
-  background: rgba(128, 128, 128, 0.05);
-  border: 1px solid var(--border-color);
-  transition: 0.3s;
-  display: flex; flex-direction: column; gap: 10px;
+  padding: 24px; border-radius: 16px; background: rgba(128, 128, 128, 0.03);
+  border: 1px solid var(--border-color); transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex; align-items: flex-start; gap: 16px;
 }
-.project-item:hover { background: var(--accent-1); color: #fff; transform: translateY(-5px); }
-.project-item:hover .p-icon { filter: brightness(0) invert(1); }
-.p-icon { font-size: 24px; }
-.p-name { font-weight: 600; font-size: 15px; }
+.project-item:hover { background: var(--bg-card); transform: translateX(10px); border-color: var(--accent-1); }
+.p-icon { 
+  width: 40px; height: 40px; border-radius: 10px; background: var(--accent-2);
+  display: flex; align-items: center; justify-content: center; color: var(--accent-1); flex-shrink: 0;
+}
+.p-icon svg { width: 20px; height: 20px; }
+.p-info h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
+.p-info p { font-size: 14px; color: var(--text-sub); }
 
 /* CONTACT */
-.contact-links { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+.contact-links { display: flex; gap: 24px; }
 .contact-links a {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: var(--text-main);
-  font-weight: 500; background: var(--accent-2);
-  padding: 12px 24px; border-radius: 99px; transition: 0.3s;
+  display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-sub);
+  font-weight: 500; font-size: 15px; transition: 0.3s;
 }
-.contact-links a:hover { background: var(--text-main); color: var(--bg-main); }
+.contact-links a svg { width: 18px; height: 18px; }
+.contact-links a:hover { color: var(--accent-1); }
+.resume-btn {
+  background: var(--text-main); color: var(--bg-main) !important;
+  padding: 12px 24px; border-radius: 99px; font-weight: 600 !important;
+}
+.resume-btn:hover { transform: scale(1.05); }
 
 /* FLOATING CONTROLS */
-.controls { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 99; }
+.controls { position: fixed; bottom: 32px; right: 32px; display: flex; flex-direction: column; gap: 12px; z-index: 99; }
 .ctrl-btn {
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--bg-card); backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-color); color: var(--text-main);
-  font-size: 20px; cursor: pointer; box-shadow: var(--card-shadow);
-  display: flex; align-items: center; justify-content: center;
-  transition: 0.3s;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-card); backdrop-filter: var(--glass-blur); border: 1px solid var(--border-color);
+  color: var(--text-main); cursor: pointer; box-shadow: var(--card-shadow);
+  display: flex; align-items: center; justify-content: center; transition: 0.3s;
 }
+.ctrl-btn svg { width: 20px; height: 20px; stroke-width: 2px; }
 .ctrl-btn:hover { background: var(--text-main); color: var(--bg-main); transform: scale(1.1); }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
-  .container { grid-template-columns: 1fr; }
-  .hero-section, .about-section, .skills-section, .projects-section, .hobbies-section, .future-section, .contact-section { grid-column: span 1; }
-  .hero-section { flex-direction: column; text-align: center; }
-  .hero-info .slogan { border-left: none; padding-left: 0; }
-  .contact-links { flex-direction: column; gap: 15px; }
+@media (max-width: 900px) {
+  .hero-section, .about-section, .skills-section, .projects-section, .hobbies-section, .contact-section { grid-column: span 12; }
+  .hero-section { flex-direction: column; text-align: center; padding: 40px 24px; }
+  .contact-section { flex-direction: column; gap: 24px; text-align: center; }
+  .contact-links { flex-direction: column; gap: 16px; align-items: center; }
 }
 </style>
 </head>
-<body>
+<body class="dark"> <!-- Mặc định Dark Mode cho sang trọng -->
 
+<div class="noise-overlay"></div>
 <div class="background-glow">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
 </div>
 
 <nav id="navbar">
-  <button class="lang-btn active" onclick="setLang('vi', this)">🇻🇳 VI</button>
-  <button class="lang-btn" onclick="setLang('en', this)">🇬🇧 EN</button>
+  <button class="lang-btn active" onclick="setLang('vi', this)">VI</button>
+  <button class="lang-btn" onclick="setLang('en', this)">EN</button>
 </nav>
 
 <div class="container">
   
   <div class="bento-card hero-section">
-    <div class="avatar-wrap"><img src="avatar.jpg" class="avatar" alt="Dao Dang Tung"></div>
+    <div class="avatar-wrap"><img src="avatar.jpg" class="avatar" alt="Dang Tung"></div>
     <div class="hero-info">
-      <h1 id="name"></h1>
+      <h1 id="name">Dang Tung</h1>
       <div class="role" id="role"></div>
       <div class="slogan" id="slogan"></div>
     </div>
   </div>
 
   <div class="bento-card about-section">
-    <div class="card-title">✨ <span id="aboutTitle"></span></div>
-    <p id="about" style="font-size: 15px; line-height: 1.8;"></p>
+    <div class="card-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+      <span id="aboutTitle"></span>
+    </div>
+    <p id="about" style="font-size: 15px;"></p>
   </div>
 
   <div class="bento-card skills-section">
-    <div class="card-title">⚡ <span id="skillTitle"></span></div>
+    <div class="card-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+      <span id="skillTitle"></span>
+    </div>
     <div class="tags-grid" id="skills"></div>
   </div>
 
   <div class="bento-card projects-section">
-    <div class="card-title">🚀 <span id="projectTitle"></span></div>
+    <div class="card-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+      <span id="projectTitle"></span>
+    </div>
     <div class="projects-grid" id="projects"></div>
   </div>
 
   <div class="bento-card hobbies-section">
-    <div class="card-title">🎯 <span id="hobbyTitle"></span></div>
+    <div class="card-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <span id="hobbyTitle"></span>
+    </div>
     <div class="tags-grid" id="hobbies"></div>
   </div>
 
-  <div class="bento-card future-section">
-    <div class="card-title">💡 <span id="futureTitle"></span></div>
-    <p id="future" style="font-size: 15px;"></p>
-  </div>
-
   <div class="bento-card contact-section">
-    <div class="card-title" style="justify-content: center;">📬 <span id="contactTitle"></span></div>
+    <div>
+      <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;" id="contactTitle"></h2>
+      <p style="color: var(--text-sub); font-size: 15px;" id="contactSub"></p>
+    </div>
     <div class="contact-links">
-      <a href="mailto:dvj1232005@gmail.com">📧 Email Me</a>
-      <a href="https://facebook.com/tungnehhh" target="_blank">📘 Facebook</a>
-      <a href="tel:0866823055">📱 0866 823 055</a>
+      <a href="mailto:dvj1232005@gmail.com">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        dvj1232005@gmail.com
+      </a>
+      <a href="https://facebook.com/tungnehhh" target="_blank">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+        Facebook
+      </a>
+      <a href="#" class="resume-btn" id="resumeBtn"></a>
     </div>
   </div>
 
@@ -281,102 +272,95 @@ nav {
 <audio id="bgMusic" loop><source src="music.mp3"></audio>
 
 <div class="controls">
-  <button class="ctrl-btn" onclick="toggleDark()" title="Theme">🌗</button>
-  <button class="ctrl-btn" onclick="toggleMusic()" id="musicBtn" title="Music">🎵</button>
+  <button class="ctrl-btn" onclick="toggleDark()" title="Toggle Theme">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+  </button>
+  <button class="ctrl-btn" onclick="toggleMusic()" id="musicBtn" title="Toggle Music">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+  </button>
 </div>
 
 <script>
-const aboutText = { 
-  vi: "Xin chào, mình là Tùng. Chú trọng trách nhiệm, sự rõ ràng trong công việc và duy trì tinh thần tích cực. Mình luôn tin rằng quá trình hoàn thiện bản thân không bao giờ có điểm dừng.", 
-  en: "Hi, I’m Tung. I value responsibility, clarity in work, and maintaining a positive mindset. I believe self-improvement is an endless journey."
-};
-
-const projectsFull = { 
-  vi: [
-    { name: "Website Portfolio Cá Nhân", icon: "👨‍💻" },
-    { name: "Website Đa Ngôn Ngữ", icon: "🌐" },
-    { name: "Hệ Thống Quản Lý CV", icon: "📋" },
-    { name: "Website Quán Cà Phê", icon: "☕" },
-    { name: "Trang Web Bán Hàng Mini", icon: "🛒" },
-    { name: "Ứng Dụng Học Tập AI", icon: "🤖" }
-  ], 
-  en: [
-    { name: "Personal Portfolio", icon: "👨‍💻" },
-    { name: "Multilingual Website", icon: "🌐" },
-    { name: "Task Management System", icon: "📋" },
-    { name: "Coffee Shop Website", icon: "☕" },
-    { name: "Mini E-commerce", icon: "🛒" },
-    { name: "AI Learning App", icon: "🤖" }
-  ]
-};
+// SVG Icons cho Projects
+const iconCode = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>`;
+const iconDesign = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`;
+const iconBriefcase = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`;
 
 const data = { 
   vi: {  
-    role: "Nhân viên tại An Cafe ☕",  
-    slogan: "“Bắt đầu từ điều nhỏ nhất, kiên trì mỗi ngày.”",  
-    aboutTitle: "Giới thiệu",  
-    skillTitle: "Kỹ năng",  
-    skills: ["Giao tiếp", "Làm việc nhóm", "Quản lý thời gian", "Tự học", "Sáng tạo"],  
-    projectTitle: "Dự án tiêu biểu",  
-    hobbyTitle: "Sở thích",  
-    hobbies: ["Chạy bộ", "Cầu lông", "Nghe nhạc", "Đọc sách"],  
-    futureTitle: "Mục tiêu",  
-    future: "Không ngừng học hỏi, nâng cao kỹ năng chuyên môn và xây dựng một sự nghiệp vững chắc.",  
-    contactTitle: "Kết nối với mình" 
+    role: "Web Developer & UI/UX Designer",  
+    slogan: "Sinh viên Kỹ thuật đam mê phát triển web và thiết kế nhận diện thương hiệu. Chuyên kiến tạo các hệ thống logic mượt mà với giao diện đồ họa đạt chuẩn pixel-perfect.",  
+    aboutTitle: "HỒ SƠ CÁ NHÂN",  
+    about: "Trang bị nền tảng tư duy kỹ thuật vững chắc kết hợp cùng gu thẩm mỹ hiện đại, mình tập trung vào việc xây dựng các ứng dụng Web toàn diện. Từ việc xử lý logic hệ thống, quản lý cơ sở dữ liệu đến việc tinh chỉnh thiết kế trải nghiệm người dùng (UI/UX) và sáng tạo nhận diện thương hiệu thương mại.",
+    skillTitle: "KỸ NĂNG CHUYÊN MÔN",  
+    skills: ["HTML / CSS", "JavaScript", "Firebase", "UI/UX Design", "Brand Identity", "Logic Circuit Design"],  
+    projectTitle: "DỰ ÁN TIÊU BIỂU",  
+    projects: [
+      { name: "Delivery Diary Application", desc: "Phát triển web app quản lý có bảo mật PIN, liên tục nâng cấp UI/UX logic.", icon: iconCode },
+      { name: "QuyChe Network Branding", desc: "Thiết kế bộ nhận diện thương hiệu, logo và ấn phẩm truyền thông.", icon: iconDesign },
+      { name: "An Cafe Marketing Visuals", desc: "Đảm nhiệm thiết kế đồ họa sự kiện theo mùa và hình ảnh thương hiệu.", icon: iconBriefcase }
+    ],
+    hobbyTitle: "SỞ THÍCH & ĐAM MÊ",  
+    hobbies: ["Bodybuilding (Recomposition)", "Mobile Esports", "Cinematic Art & Lighting"],  
+    contactTitle: "Sẵn sàng hợp tác?",  
+    contactSub: "Liên hệ với mình để cùng trao đổi về các dự án sắp tới.",
+    resumeBtn: "Tải CV (PDF)"
   }, 
   en: {  
-    role: "Staff at An Cafe ☕",  
-    slogan: "“Start small. Stay consistent. Become better every day.”",  
-    aboutTitle: "About Me",  
-    skillTitle: "Core Skills",  
-    skills: ["Communication", "Teamwork", "Time Management", "Self-learning", "Creative"],  
-    projectTitle: "Featured Projects",  
-    hobbyTitle: "Interests",  
-    hobbies: ["Jogging", "Badminton", "Music", "Reading"],  
-    futureTitle: "Future Goals",  
-    future: "Continuously learning to improve professional skills and build a solid career foundation.",  
-    contactTitle: "Let's Connect" 
+    role: "Web Developer & UI/UX Designer",  
+    slogan: "Engineering student passionate about web development and brand identity. Dedicated to crafting seamless logic systems with pixel-perfect graphical interfaces.",  
+    aboutTitle: "PROFESSIONAL SUMMARY",  
+    about: "Combining a solid technical foundation with modern aesthetics, I focus on building comprehensive web applications. My expertise ranges from handling system logic and database management to refining User Experience (UI/UX) and creating commercial brand identities.",
+    skillTitle: "TECHNICAL SKILLS",  
+    skills: ["HTML / CSS", "JavaScript", "Firebase", "UI/UX Design", "Brand Identity", "Logic Circuit Design"],  
+    projectTitle: "SELECTED WORK",  
+    projects: [
+      { name: "Delivery Diary Application", desc: "Developed a secure web app with PIN management and advanced UI/UX logic.", icon: iconCode },
+      { name: "QuyChe Network Branding", desc: "Designed comprehensive brand identity, logos, and media publications.", icon: iconDesign },
+      { name: "An Cafe Marketing Visuals", desc: "Handled seasonal event graphics and brand visual communication.", icon: iconBriefcase }
+    ],
+    hobbyTitle: "PERSONAL INTERESTS",  
+    hobbies: ["Bodybuilding (Recomposition)", "Mobile Esports", "Cinematic Art & Lighting"],  
+    contactTitle: "Ready to collaborate?",  
+    contactSub: "Get in touch to discuss your next big project.",
+    resumeBtn: "Download Resume"
   }
 };
 
 function setLang(l, btnElement) { 
-  // Update active button state
   if(btnElement) {
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     btnElement.classList.add('active');
   }
 
-  document.getElementById("name").innerText = "Đào Đăng Tùng (Bin)"; 
   const d = data[l] || data.en;
   
   document.getElementById("role").innerText = d.role; 
   document.getElementById("slogan").innerText = d.slogan; 
-  
   document.getElementById("aboutTitle").innerText = d.aboutTitle; 
-  document.getElementById("about").innerText = aboutText[l];
-  
+  document.getElementById("about").innerText = d.about;
   document.getElementById("skillTitle").innerText = d.skillTitle; 
   document.getElementById("skills").innerHTML = d.skills.map(s => `<div class="bento-tag">${s}</div>`).join("");
   
   document.getElementById("projectTitle").innerText = d.projectTitle; 
-  const projArray = projectsFull[l] || projectsFull.en;
-  document.getElementById("projects").innerHTML = projArray.map(p => `
+  document.getElementById("projects").innerHTML = d.projects.map(p => `
     <div class="project-item">
       <div class="p-icon">${p.icon}</div>
-      <div class="p-name">${p.name}</div>
+      <div class="p-info">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+      </div>
     </div>
   `).join("");
   
   document.getElementById("hobbyTitle").innerText = d.hobbyTitle; 
   document.getElementById("hobbies").innerHTML = d.hobbies.map(h => `<div class="bento-tag">${h}</div>`).join("");
   
-  document.getElementById("futureTitle").innerText = d.futureTitle; 
-  document.getElementById("future").innerText = d.future;
-  
   document.getElementById("contactTitle").innerText = d.contactTitle;
+  document.getElementById("contactSub").innerText = d.contactSub;
+  document.getElementById("resumeBtn").innerText = d.resumeBtn;
 }
 
-// Khởi tạo ngôn ngữ mặc định
 setLang("vi");
 
 // Xử lý Audio
@@ -386,10 +370,10 @@ function toggleMusic() {
   const btn = document.getElementById('musicBtn');
   if(play) {
     music.pause();
-    btn.innerHTML = "🎵";
+    btn.style.opacity = "0.6";
   } else {
     music.play();
-    btn.innerHTML = "🎶";
+    btn.style.opacity = "1";
   }
   play = !play;
 }
@@ -399,34 +383,19 @@ function toggleDark() {
   document.body.classList.toggle("dark");
 }
 
-// Intersection Observer cho hiệu ứng xuất hiện mượt mà
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
-
+// Intersection Observer (Hiệu ứng xuất hiện)
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, index) => {
     if (entry.isIntersecting) {
-      // Thêm delay nhẹ cho mỗi card để tạo hiệu ứng lượn sóng (stagger)
-      setTimeout(() => {
-        entry.target.classList.add('show');
-      }, index * 100);
+      setTimeout(() => { entry.target.classList.add('show'); }, index * 100);
       observer.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-document.querySelectorAll('.bento-card').forEach((card) => {
-  observer.observe(card);
-});
-
-// Chạy sẵn animation cho section Hero khi vừa load web
-setTimeout(() => {
-  document.querySelector('.hero-section').classList.add('show');
-}, 100);
-
+document.querySelectorAll('.bento-card').forEach((card) => { observer.observe(card); });
+setTimeout(() => { document.querySelector('.hero-section').classList.add('show'); }, 100);
 </script>
 </body>
 </html>
