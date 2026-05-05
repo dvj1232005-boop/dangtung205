@@ -121,14 +121,12 @@ nav {
 .hero-info .slogan { font-size: 16px; color: var(--text-sub); line-height: 1.8; }
 
 /* ========================================================
-   🔥 HIỆU ỨNG AVATAR ĐẬP THEO NHỊP & DOT XANH
+   🔥 HIỆU ỨNG AVATAR CHUẨN GAMER/MODDER
    ======================================================== */
 .avatar-wrap {  
   width: 180px; height: 180px; border-radius: 50%; padding: 4px; 
-  /* Gradient màu đỏ viền giống mẫu */
   background: linear-gradient(135deg, #ff0f48, #2a00ff);
   position: relative;
-  /* Hiệu ứng nhịp đập */
   animation: avatarPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -137,18 +135,77 @@ nav {
   border-radius: 50%; border: 4px solid #050505; 
 }
 
-/* Dấu chấm xanh online */
+/* 1. Dấu chấm xanh online */
 .online-dot {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
+  bottom: 20px;
+  right: 0px;
+  width: 22px;
+  height: 22px;
   background-color: #22c55e;
   border: 4px solid #050505;
   border-radius: 50%;
   box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
   animation: blink 2s infinite;
+  z-index: 10;
+}
+
+/* 2. Ký hiệu gân xanh/nổi giận Anime (Góc trên phải) */
+.anger-mark {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px rgba(255, 15, 72, 0.8));
+  animation: popAnger 0.6s infinite alternate;
+}
+@keyframes popAnger {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15) rotate(5deg); }
+}
+
+/* 3. Bong bóng dấu chấm than (Góc dưới trái) */
+.exclamation-bubble {
+  position: absolute;
+  bottom: 12px;
+  left: -15px;
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  animation: floatBubble 2.5s infinite ease-in-out;
+}
+.exclamation-bubble::after {
+  content: '!';
+  color: #050505;
+  font-weight: 900;
+  font-size: 26px;
+  font-family: 'Inter', sans-serif;
+  margin-top: 2px;
+}
+.exclamation-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-right: 3px solid #050505;
+  border-bottom: 3px solid #050505;
+  transform: rotate(45deg);
+  z-index: -1;
+  border-bottom-right-radius: 3px;
+}
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 @keyframes avatarPulse {
@@ -157,8 +214,8 @@ nav {
     box-shadow: 0 0 20px rgba(255, 15, 72, 0.5), 0 0 0 0 rgba(255, 15, 72, 0.4);
   }
   50% {
-    transform: scale(1.06); /* Phóng to nhẹ tạo cảm giác đập */
-    box-shadow: 0 0 40px rgba(42, 0, 255, 0.7), 0 0 0 12px rgba(42, 0, 255, 0); /* Toả viền sáng ra ngoài */
+    transform: scale(1.06); 
+    box-shadow: 0 0 40px rgba(42, 0, 255, 0.7), 0 0 0 12px rgba(42, 0, 255, 0); 
   }
   100% {
     transform: scale(1);
@@ -257,9 +314,18 @@ nav {
       </div>
     </div>
     
-    <!-- Đã thêm .online-dot vào bên trong avatar-wrap -->
     <div class="avatar-wrap">
+      <!-- Icon nổi giận anime (Vẽ bằng SVG để sắc nét y như thật) -->
+      <svg class="anger-mark" viewBox="0 0 128 128" width="45" height="45">
+        <path fill="#ff0f48" stroke="#000" stroke-width="6" d="M98.5 35.8c-2.4-3.5-7.1-4.3-10.6-1.9L73.1 44.1l-10.2-14c-2.4-3.5-7.1-4.3-10.6-1.9-3.5 2.4-4.3 7.1-1.9 10.6l10.2 14-14.8 10.8c-3.5 2.4-4.3 7.1-1.9 10.6 1.5 2 3.8 3 6.2 3 1.6 0 3.2-.5 4.5-1.5l14.8-10.8 10.2 14c1.5 2 3.8 3 6.2 3 1.6 0 3.2-.5 4.5-1.5 3.5-2.4 4.3-7.1 1.9-10.6l-10.2-14 14.8-10.8c3.4-2.5 4.2-7.2 1.8-10.7z"/>
+      </svg>
+      
       <img src="avatar.jpg" class="avatar" alt="Dang Tung">
+      
+      <!-- Bong bóng dấu chấm than -->
+      <div class="exclamation-bubble"></div>
+      
+      <!-- Chấm xanh Online -->
       <div class="online-dot"></div>
     </div>
 
