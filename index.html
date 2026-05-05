@@ -14,6 +14,7 @@
   --text-sub: #a1a1aa;  
   --accent-1: #3b82f6; 
   --accent-2: #8b5cf6; 
+  --highlight: #fbbf24; /* Màu vàng nổi bật cho Role */
   --border-color: rgba(255, 255, 255, 0.08);
   --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   --glass-blur: blur(24px);
@@ -117,7 +118,21 @@ nav {
   letter-spacing: -2px; 
 }
 
-.hero-info .role { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text-sub); margin-bottom: 20px; display: inline-block; }
+.hero-info .role { 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 18px; 
+  color: var(--text-sub); 
+  margin-bottom: 20px; 
+  display: inline-block; 
+}
+
+/* 🔥 Đổi màu nổi bật cho chữ chạy (Developer, IOS Gamer...) */
+#roleType {
+  color: var(--highlight);
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
 .hero-info .slogan { font-size: 16px; color: var(--text-sub); line-height: 1.8; }
 
 /* ========================================================
@@ -150,62 +165,33 @@ nav {
   z-index: 10;
 }
 
-/* 2. Ký hiệu gân xanh/nổi giận Anime (Góc trên phải) */
+/* 2. Ký hiệu gân xanh/nổi giận Anime (Chuẩn nét, viền đen) */
 .anger-mark {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -12px;
+  right: -5px;
   z-index: 10;
-  filter: drop-shadow(0 0 8px rgba(255, 15, 72, 0.8));
-  animation: popAnger 0.6s infinite alternate;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+  animation: popAnger 1.5s infinite alternate;
 }
 @keyframes popAnger {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.15) rotate(5deg); }
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 
-/* 3. Bong bóng dấu chấm than (Góc dưới trái) */
+/* 3. Bong bóng dấu chấm than (Bóng thoại chuẩn viền đen) */
 .exclamation-bubble {
   position: absolute;
-  bottom: 12px;
-  left: -15px;
-  width: 42px;
-  height: 42px;
-  background: #fff;
-  border-radius: 50%;
-  border: 3px solid #050505;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  bottom: 5px;
+  left: -20px;
   z-index: 10;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  animation: floatBubble 2.5s infinite ease-in-out;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+  animation: floatAlert 2s infinite ease-in-out;
 }
-.exclamation-bubble::after {
-  content: '!';
-  color: #050505;
-  font-weight: 900;
-  font-size: 26px;
-  font-family: 'Inter', sans-serif;
-  margin-top: 2px;
-}
-.exclamation-bubble::before {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  right: 2px;
-  width: 14px;
-  height: 14px;
-  background: #fff;
-  border-right: 3px solid #050505;
-  border-bottom: 3px solid #050505;
-  transform: rotate(45deg);
-  z-index: -1;
-  border-bottom-right-radius: 3px;
-}
-@keyframes floatBubble {
+@keyframes floatAlert {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes avatarPulse {
@@ -315,15 +301,19 @@ nav {
     </div>
     
     <div class="avatar-wrap">
-      <!-- Icon nổi giận anime (Vẽ bằng SVG để sắc nét y như thật) -->
-      <svg class="anger-mark" viewBox="0 0 128 128" width="45" height="45">
-        <path fill="#ff0f48" stroke="#000" stroke-width="6" d="M98.5 35.8c-2.4-3.5-7.1-4.3-10.6-1.9L73.1 44.1l-10.2-14c-2.4-3.5-7.1-4.3-10.6-1.9-3.5 2.4-4.3 7.1-1.9 10.6l10.2 14-14.8 10.8c-3.5 2.4-4.3 7.1-1.9 10.6 1.5 2 3.8 3 6.2 3 1.6 0 3.2-.5 4.5-1.5l14.8-10.8 10.2 14c1.5 2 3.8 3 6.2 3 1.6 0 3.2-.5 4.5-1.5 3.5-2.4 4.3-7.1 1.9-10.6l-10.2-14 14.8-10.8c3.4-2.5 4.2-7.2 1.8-10.7z"/>
+      <!-- Icon Nổi giận chuẩn Manga (4 vòng cung có viền đen) -->
+      <svg class="anger-mark" viewBox="0 0 100 100" width="55" height="55">
+         <path fill="#ff0f48" stroke="#000" stroke-width="5" stroke-linejoin="round" d="M50 20 c 8 0, 15 7, 15 15 c 10 0, 15 7, 15 15 c 0 8, -5 15, -15 15 c 0 8, -7 15, -15 15 c -8 0, -15 -7, -15 -15 c -10 0, -15 -7, -15 -15 c 0 -8, 5 -15, 15 -15 c 0 -8, 7 -15, 15 -15 z"/>
+         <path fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" d="M50 35 v 30 M35 50 h 30"/>
       </svg>
       
       <img src="avatar.jpg" class="avatar" alt="Dang Tung">
       
-      <!-- Bong bóng dấu chấm than -->
-      <div class="exclamation-bubble"></div>
+      <!-- Bong bóng thoại chấm than chuẩn xác -->
+      <svg class="exclamation-bubble" viewBox="0 0 100 100" width="55" height="55">
+        <path fill="#ffffff" stroke="#000000" stroke-width="6" stroke-linejoin="round" d="M 50 15 C 30 15 15 30 15 50 C 15 62 21 72 30 78 L 22 92 L 38 83 C 42 84 46 85 50 85 C 70 85 85 70 85 50 C 85 30 70 15 50 15 Z" />
+        <path fill="#000000" d="M 44 32 L 56 32 L 54 60 L 46 60 Z M 45 72 A 5 5 0 1 0 55 72 A 5 5 0 1 0 45 72 Z" />
+      </svg>
       
       <!-- Chấm xanh Online -->
       <div class="online-dot"></div>
@@ -390,7 +380,7 @@ const data = {
   vi: {  
     status: "Sẵn sàng nhận việc / Freelance",
     rolePrefix: "and I'm a ",
-    roles: ["Developer", "IOS", "Gamer", "Modder", "Youtube"],
+    roles: ["Developer", "IOS Gamer", "Youtube", "Modder"],
     slogan: "Kết hợp tư duy logic từ kỹ thuật và gu thẩm mỹ hiện đại để kiến tạo các sản phẩm Web tối ưu hiệu suất, mang lại trải nghiệm người dùng (UI/UX) vượt trội.",  
     about: "Là một sinh viên có tinh thần làm chủ (ownership) và khả năng tự nghiên cứu sâu, tôi định hướng trở thành một Frontend Developer toàn diện. Nền tảng cốt lõi của tôi xoay quanh HTML, CSS, JavaScript thuần và tôi đang chuyển tiếp mạnh mẽ sang kiến trúc Component-based. Kinh nghiệm làm việc thực tế giúp tôi rèn luyện tư duy giải quyết vấn đề linh hoạt, khả năng giao tiếp kỹ thuật rõ ràng và luôn đặt mục tiêu tối ưu hóa giá trị sản phẩm lên hàng đầu.",
     skills: [
@@ -431,7 +421,7 @@ const data = {
   en: {  
     status: "Available for work / Freelance",
     rolePrefix: "and I'm a ",
-    roles: ["Developer", "IOS", "Gamer", "Modder", "Youtube"],
+    roles: ["Developer", "IOS Gamer", "Youtube", "Modder"],
     slogan: "Fusing technical logic with modern aesthetics to architect high-performance web products and deliver exceptional user experiences (UI/UX).",  
     about: "As a student with a strong sense of ownership and deep self-learning capabilities, my trajectory is set on becoming a versatile Frontend Developer. My core stack revolves around HTML, CSS, and Vanilla JavaScript, and I am actively transitioning into component-based architectures. Practical work experience has sharpened my agile problem-solving mindset, clear technical communication, and a relentless focus on maximizing product value.",
     skills: [
