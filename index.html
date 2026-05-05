@@ -109,54 +109,63 @@ nav {
 .status-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 10px #4ade80; animation: blink 2s infinite; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-/* ========================================================
-   🔥 HIỆU ỨNG TÊN "DANG TUNG" (CINEMATIC TECH GLITCH) 
-   ======================================================== */
-.glitch-name { 
+#name { 
   font-family: 'JetBrains Mono', monospace; 
   font-size: 56px; 
   font-weight: 800; 
   margin-bottom: 8px; 
   letter-spacing: -2px; 
-  cursor: pointer;
-  display: inline-block;
-  user-select: none;
-  
-  /* Cinematic Light Shimmer */
-  background: linear-gradient(90deg, #ffffff 0%, var(--accent-1) 30%, #ffffff 50%, var(--accent-2) 70%, #ffffff 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine 4s linear infinite;
-  
-  /* Smooth transitions */
-  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              letter-spacing 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              text-shadow 0.3s ease;
 }
-
-.glitch-name:hover {
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
-}
-
-.glitch-name:active {
-  transform: scale(0.95);
-}
-
-@keyframes shine { to { background-position: 200% center; } }
-/* ======================================================== */
 
 .hero-info .role { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text-sub); margin-bottom: 20px; display: inline-block; }
 .hero-info .slogan { font-size: 16px; color: var(--text-sub); line-height: 1.8; }
 
+/* ========================================================
+   🔥 HIỆU ỨNG AVATAR ĐẬP THEO NHỊP & DOT XANH
+   ======================================================== */
 .avatar-wrap {  
   width: 180px; height: 180px; border-radius: 50%; padding: 4px; 
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+  /* Gradient màu đỏ viền giống mẫu */
+  background: linear-gradient(135deg, #ff0f48, #2a00ff);
+  position: relative;
+  /* Hiệu ứng nhịp đập */
+  animation: avatarPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
-.avatar { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid #050505; }
+
+.avatar { 
+  width: 100%; height: 100%; object-fit: cover; 
+  border-radius: 50%; border: 4px solid #050505; 
+}
+
+/* Dấu chấm xanh online */
+.online-dot {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background-color: #22c55e;
+  border: 4px solid #050505;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+  animation: blink 2s infinite;
+}
+
+@keyframes avatarPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 15, 72, 0.5), 0 0 0 0 rgba(255, 15, 72, 0.4);
+  }
+  50% {
+    transform: scale(1.06); /* Phóng to nhẹ tạo cảm giác đập */
+    box-shadow: 0 0 40px rgba(42, 0, 255, 0.7), 0 0 0 12px rgba(42, 0, 255, 0); /* Toả viền sáng ra ngoài */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 15, 72, 0.5), 0 0 0 0 rgba(255, 15, 72, 0);
+  }
+}
+/* ======================================================== */
 
 .skill-item { margin-bottom: 16px; }
 .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
@@ -242,13 +251,18 @@ nav {
     <div class="hero-content">
       <div class="status-badge"><div class="status-dot"></div> <span id="statusText">Available for work</span></div>
       <div class="hero-info">
-        <!-- Đã thêm class và data-value cho hiệu ứng -->
-        <h1 id="name" class="glitch-name" data-value="Dang Tung">Dang Tung</h1>
-        <div class="role"><span id="roleType"></span><span style="animation: blink 1s infinite;">_</span></div>
+        <h1 id="name">Dang Tung</h1>
+        <div class="role"><span id="rolePrefix"></span><span id="roleType"></span><span style="animation: blink 1s infinite;">_</span></div>
         <div class="slogan" id="slogan"></div>
       </div>
     </div>
-    <div class="avatar-wrap"><img src="avatar.jpg" class="avatar" alt="Dang Tung"></div>
+    
+    <!-- Đã thêm .online-dot vào bên trong avatar-wrap -->
+    <div class="avatar-wrap">
+      <img src="avatar.jpg" class="avatar" alt="Dang Tung">
+      <div class="online-dot"></div>
+    </div>
+
   </div>
 
   <div class="bento-card about-section">
@@ -302,52 +316,6 @@ nav {
 </div>
 
 <script>
-/* ========================================================
-   🔥 SCRIPT HIỆU ỨNG TÊN (SCRAMBLE DECODING)
-   ======================================================== */
-const nameEl = document.getElementById("name");
-// Tập hợp các ký tự Hacker/Tech
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-let scrambleInterval = null;
-
-function runGlitchEffect(target) {
-  let iteration = 0;
-  clearInterval(scrambleInterval);
-  const originalText = target.dataset.value;
-  
-  scrambleInterval = setInterval(() => {
-    target.innerText = originalText
-      .split("")
-      .map((letter, index) => {
-        if(index < iteration) {
-          return originalText[index];
-        }
-        return letters[Math.floor(Math.random() * letters.length)];
-      })
-      .join("");
-    
-    if(iteration >= originalText.length){ 
-      clearInterval(scrambleInterval);
-    }
-    iteration += 1 / 3; // Điều chỉnh tốc độ giải mã
-  }, 30);
-}
-
-// Bật hiệu ứng khi rê chuột vào
-nameEl.addEventListener("mouseover", (e) => {
-  runGlitchEffect(e.target);
-});
-
-// Bật hiệu ứng mạnh hơn khi click (Kèm vụ nổ ánh sáng Glow)
-nameEl.addEventListener("click", (e) => {
-  runGlitchEffect(e.target);
-  e.target.style.textShadow = "0 0 40px #3b82f6, 0 0 80px #8b5cf6, 0 0 120px #ffffff";
-  setTimeout(() => {
-    e.target.style.textShadow = "0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)";
-  }, 300);
-});
-/* ======================================================== */
-
 const iconWeb = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`;
 const iconDB = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>`;
 const iconShop = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>`;
@@ -355,7 +323,8 @@ const iconShop = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><pa
 const data = { 
   vi: {  
     status: "Sẵn sàng nhận việc / Freelance",
-    roleText: "Junior Frontend Developer",
+    rolePrefix: "and I'm a ",
+    roles: ["Developer", "IOS", "Gamer", "Modder", "Youtube"],
     slogan: "Kết hợp tư duy logic từ kỹ thuật và gu thẩm mỹ hiện đại để kiến tạo các sản phẩm Web tối ưu hiệu suất, mang lại trải nghiệm người dùng (UI/UX) vượt trội.",  
     about: "Là một sinh viên có tinh thần làm chủ (ownership) và khả năng tự nghiên cứu sâu, tôi định hướng trở thành một Frontend Developer toàn diện. Nền tảng cốt lõi của tôi xoay quanh HTML, CSS, JavaScript thuần và tôi đang chuyển tiếp mạnh mẽ sang kiến trúc Component-based. Kinh nghiệm làm việc thực tế giúp tôi rèn luyện tư duy giải quyết vấn đề linh hoạt, khả năng giao tiếp kỹ thuật rõ ràng và luôn đặt mục tiêu tối ưu hóa giá trị sản phẩm lên hàng đầu.",
     skills: [
@@ -395,7 +364,8 @@ const data = {
   }, 
   en: {  
     status: "Available for work / Freelance",
-    roleText: "Junior Frontend Developer",
+    rolePrefix: "and I'm a ",
+    roles: ["Developer", "IOS", "Gamer", "Modder", "Youtube"],
     slogan: "Fusing technical logic with modern aesthetics to architect high-performance web products and deliver exceptional user experiences (UI/UX).",  
     about: "As a student with a strong sense of ownership and deep self-learning capabilities, my trajectory is set on becoming a versatile Frontend Developer. My core stack revolves around HTML, CSS, and Vanilla JavaScript, and I am actively transitioning into component-based architectures. Practical work experience has sharpened my agile problem-solving mindset, clear technical communication, and a relentless focus on maximizing product value.",
     skills: [
@@ -436,15 +406,38 @@ const data = {
 };
 
 let currentLang = 'vi';
+let typingTimeout;
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let currentRoles = [];
 
-let typeInterval;
-function typeWriter(text, i, fnCallback) {
-  if (i < (text.length)) {
-    document.getElementById("roleType").innerHTML = text.substring(0, i+1);
-    typeInterval = setTimeout(function() { typeWriter(text, i + 1, fnCallback) }, 50);
-  } else if (typeof fnCallback == 'function') {
-    setTimeout(fnCallback, 700);
+function typeRole() {
+  if (!currentRoles.length) return;
+  const currentRole = currentRoles[roleIndex];
+  const roleElement = document.getElementById("roleType");
+  
+  if (isDeleting) {
+    roleElement.innerHTML = currentRole.substring(0, charIndex - 1);
+    charIndex--;
+  } else {
+    roleElement.innerHTML = currentRole.substring(0, charIndex + 1);
+    charIndex++;
   }
+
+  let typeSpeed = 100;
+  if (isDeleting) typeSpeed /= 2;
+
+  if (!isDeleting && charIndex === currentRole.length) {
+    typeSpeed = 2000; // Dừng lại ở cuối từ
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    roleIndex = (roleIndex + 1) % currentRoles.length;
+    typeSpeed = 500; // Chờ trước khi gõ từ tiếp theo
+  }
+
+  typingTimeout = setTimeout(typeRole, typeSpeed);
 }
 
 function setLang(l, btnElement) { 
@@ -458,9 +451,15 @@ function setLang(l, btnElement) {
   
   document.getElementById("statusText").innerText = d.status; 
   
-  clearTimeout(typeInterval);
+  document.getElementById("rolePrefix").innerText = d.rolePrefix;
+  
+  clearTimeout(typingTimeout);
   document.getElementById("roleType").innerHTML = "";
-  typeWriter(d.roleText, 0);
+  currentRoles = d.roles;
+  roleIndex = 0;
+  charIndex = 0;
+  isDeleting = false;
+  typeRole();
 
   document.getElementById("slogan").innerText = d.slogan; 
   document.getElementById("about").innerText = d.about;
